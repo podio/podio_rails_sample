@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Organization</th>
+    <th>Lead Contact</th>
+    <th>Sales Contact</th>
+    <th>Potential Revenue</th>
+    <th>Probability</th>
+    <th>Status</th>
+    <th>Next follow up at</th>
+  </tr>
+  <% for lead in @leads %>
+    <tr>
+      <td><%= lead.organization %></td>
+      <td><%= lead.lead_contact %></td>
+      <td><%= lead.sales_contact %></td>
+      <td><%= number_to_currency(lead.potential_revenue['value'].to_f, :unit => lead.potential_revenue['currency']) %></td>
+      <td><%= number_to_percentage(lead.probability.to_i) %></td>
+      <td><%= lead.status %></td>
+      <td><%= l(lead.followup_at.to_date) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Create a new lead', new_lead_path %></p>
