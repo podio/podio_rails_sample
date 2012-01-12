@@ -1,0 +1,32 @@
+<%= form_for :lead, :url => leads_path do |form| %>
+  <p>
+    <%= form.label :organization %>
+    <%= form.text_field :organization %>
+  </p>
+  <p>
+    <%= form.label :lead_contact %>
+    <%= form.select :lead_contact, @lead_contacts.collect { |lc| [lc.name, lc.profile_id] } %>
+  </p>
+  <p>
+    <%= form.label :sales_contact %>
+    <%= form.select :sales_contact, @sales_contacts.collect { |lc| [lc.name, lc.profile_id] } %>
+  </p>
+  <p>
+    <%= form.label :potential_revenue %>
+    <%= form.text_field :potential_revenue %> USD
+  </p>
+  <p>
+    <%= form.label :probability %>
+    <%= form.text_field :probability %>
+  </p>
+  <p>
+    <%= form.label :status %>
+    <%= form.select :status, @statuses %>
+  </p>
+  <p>
+    <%= form.label :followup_at %>
+    <%= form.date_select :followup_at %>
+  </p>
+  
+  <%= form.submit 'Create Lead' %>
+<% end %>
