@@ -12,10 +12,12 @@ To be able to run this sample you must also have the Leads app installed on Podi
 
 You must put your API key and secret in the environment variables PODIO_CLIENT_ID and PODIO_CLIENT_SECRET. Alternatively you can hardcode them in config/initializers/podio.rb.
 
-You must also update the hardcoded APP_ID constant in app/models/lead.rb to the app id of your instance of the Leads app. You find this id by going to the Leads app on Podio and copying the last numerical part of the url.
+You must also update the hardcoded APP_ID and SPACE_ID constants in app/models/lead.rb to the corresponding ids for your instance of the Leads app. You find the app id by going to the Leads app on Podio and copying the last numerical part of the url. The space id cannot be taken directly from the url, but one way to get it is to evaluate Podio.Config.space_id in the javascript console when you are on the Leads app.
 
 == Tips
 
 You probably want to work with Podio apps that has a completely different structure than the Leads app used in this example. The easiest way to the see the structure and the all-important external ids of you app, is to go to https://developers.podio.com/doc/applications/get-app-22349 and enter the app id with "full" as type in the in the sandbox.
 
 You can also see exactly what fields and values you get from a Get Items call by using the sandbox here: https://developers.podio.com/doc/items/get-items-27803
+
+The authentication in this app is based on Omniauth and a strategy for using Omnioauth with Podio - https://github.com/lucasallan/omniauth-podio. On top of that it pretty much follows the steps outlined in the RailsCast about simple Omniauth usage - http://railscasts.com/episodes/241-simple-omniauth?view=asciicast.
