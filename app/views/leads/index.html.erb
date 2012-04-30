@@ -7,16 +7,18 @@
     <th>Probability</th>
     <th>Status</th>
     <th>Next follow up at</th>
+    <th></th>
   </tr>
   <% for lead in @leads %>
     <tr>
       <td><%= lead.organization %></td>
       <td><%= lead.lead_contact %></td>
       <td><%= lead.sales_contact %></td>
-      <td><%= number_to_currency(lead.potential_revenue['value'].to_f, :unit => lead.potential_revenue['currency']) %></td>
+      <td><%= number_to_currency(lead.potential_revenue_value, :unit => lead.potential_revenue_currency) %></td>
       <td><%= number_to_percentage(lead.probability.to_i) %></td>
       <td><%= lead.status %></td>
       <td><%= l(lead.followup_at.to_date) %></td>
+      <td><%= link_to 'Edit', edit_lead_path(lead.id) %></td>
     </tr>
   <% end %>
 </table>

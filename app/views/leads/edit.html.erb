@@ -1,0 +1,4 @@
+<%= form_for :lead, :url => lead_path(@lead.id), :method => :put do |form| %>
+  <%= render 'form', :form => form %>
+  <%= form.submit 'Update Lead' %>
+<% end %>
