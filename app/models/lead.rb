@@ -10,12 +10,12 @@ class Lead < Podio::Item
 
   # Find valid lead contacts in the space
   def self.space_contacts
-    Podio::Contact.find_all_for_space(SPACE_ID, :order => 'contact', :limit => 12, :contact_type => 'space,connection', :exclude_self => false)
+    Podio::Contact.find_all_for_space(SPACE_ID, :order => 'contact', :limit => 12, :contact_type => 'space,connection', :exclude_self => false) rescue []
   end
 
   # Find valid sales contacts in the space
   def self.users
-    Podio::Contact.find_all_for_space(SPACE_ID, :order => 'contact', :limit => 12, :contact_type => 'user', :exclude_self => false)
+    Podio::Contact.find_all_for_space(SPACE_ID, :order => 'contact', :limit => 12, :contact_type => 'user', :exclude_self => false) rescue []
   end
 
   # Find valid statuses
@@ -74,11 +74,16 @@ class Lead < Podio::Item
 
     def field_values_by_external_id(external_id, options = {})
       if self.fields.present?
-        values = self.fields.find { |field| field['external_id'] == external_id }['values']
-        if options[:simple]
-          values.first['value']
+        field = self.fields.find { |field| field['external_id'] == external_id }
+        if field
+          values = field['values']
+          if options[:simple]
+            values.first['value']
+          else
+            values
+          end
         else
-          values
+          nil
         end
       else
         nil
@@ -88,13 +93,13 @@ class Lead < Podio::Item
     def self.fields_from_params(params)
       {
         'company-or-organisation' => params[:organization],
-        'contacts' => params[:lead_contact].to_i,
-        'sales-contact' => params[:sales_contact].to_i,
+        'contacts' => (params[:lead_contact].present? ? params[:lead_contact].to_i : nil),
+        'sales-contact' => (params[:sales_contact].present? ? params[:sales_contact].to_i : nil),
         'potential-revenue' => { :value => params['potential_revenue_value'], :currency => params['potential_revenue_currency'] },
         'probability-of-sale' => params[:probability].to_i,
         'status' => params[:status],
         'next-follow-up' => DateTime.new(params['followup_at(1i)'].to_i, params['followup_at(2i)'].to_i, params['followup_at(3i)'].to_i).to_s(:db)
-      }
+      }.delete_if { |k, v| v.nil? }
     end
 
 end

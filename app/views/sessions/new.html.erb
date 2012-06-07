@@ -1,2 +1,15 @@
 <h3>You are not signed in</h3>
 <p><a href="/auth/podio">Sign in with Podio</a></p>
+
+<%= form_tag(create_from_app_auth_sessions_path) do %>
+  <h4>Sign in using app auth</h4>
+  <p>
+    <%= label_tag :app_id, 'App id' %>
+    <%= text_field_tag :app_id %>
+  </p>
+  <p>
+    <%= label_tag :app_token, 'App token' %>
+    <%= text_field_tag :app_token %>
+  </p>
+  <p><%= submit_tag('Authenticate as app') %></p>
+<% end %>

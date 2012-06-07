@@ -1,10 +1,15 @@
 PodioRailsSample::Application.routes.draw do
 
   root :to => 'leads#index'
-  resources :sessions, :only => [:new, :create, :destroy]
+  resources :sessions, :only => [:new, :create] do
+    collection do
+      delete :destroy
+      post :create_from_app_auth
+    end
+  end
   match "/auth/:provider/callback" => "sessions#create"
   resources :leads
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

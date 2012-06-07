@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
         redirect_to new_session_path
       end
     end
-  
+
     def init_podio_client
       Podio.setup(
         :api_url => 'https://api.podio.com',
