@@ -23,6 +23,11 @@ class LeadsController < ApplicationController
     redirect_to leads_path, :notice => 'Lead updated'
   end
 
+  def destroy
+    Lead.delete(params[:id])
+    redirect_to leads_path, :notice => 'Lead deleted'
+  end
+
   protected
 
     def load_collections
