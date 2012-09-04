@@ -9,6 +9,7 @@ PodioRailsSample::Application.routes.draw do
   end
   match "/auth/:provider/callback" => "sessions#create"
   resources :leads
+  resources :tasks
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

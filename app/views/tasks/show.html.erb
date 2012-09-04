@@ -1,0 +1,23 @@
+<h1><%= @task.text %></h1>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @task.group %>
+</p>
+
+<p>
+  <strong>Decscription:</strong>
+  <%= @task.description %>
+</p>
+
+<p>
+  <strong>Due on:</strong>
+  <%= @task.due_on %>
+</p>
+
+<p><%= link_to 'Show tasks', tasks_path %></p>

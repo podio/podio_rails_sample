@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>Task ID</th>
+    <th>Status</th>
+    <th>Group</th>
+    <th>Text</th>
+    <th></th>
+  </tr>
+  <% for task in @tasks %>
+    <tr>
+      <td><%= task.id %></td>
+      <td><%= task.status %></td>
+      <td><%= task.group %></td>
+      <td><%= task.text %></td>
+      <td><%= link_to 'Details', task_path(task.id) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to 'Show leads', leads_path %> | <%= link_to 'Logout', sessions_path, :method => :delete %></p>

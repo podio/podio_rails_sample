@@ -23,4 +23,8 @@
   <% end %>
 </table>
 
-<p><%= link_to 'Create a new lead', new_lead_path %> | <%= link_to 'Logout', sessions_path, :method => :delete %></p>
+<p>
+  <%= link_to 'Create a new lead', new_lead_path %> |
+  <%= link_to 'Show tasks', tasks_path %> |
+  <%= link_to 'Logout', sessions_path, :method => :delete %>
+</p>
