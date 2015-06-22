@@ -1,6 +1,6 @@
 class Lead < Podio::Item
-  APP_ID = 573839
-  SPACE_ID = 153322
+  APP_ID = 12695955
+  SPACE_ID = 3631649
 
   # Find all items in the Leads app
   def self.all
@@ -21,8 +21,8 @@ class Lead < Podio::Item
   # Find valid statuses
   def self.statuses
     app = Podio::Application.find(APP_ID)
-    field = app.fields.find { |field| field['external_id'] == 'status' }
-    field['config']['settings']['allowed_values']
+    field = app.fields.find { |field| field['external_id'] == 'status2' }
+    field['config']['settings']['options'].map { |option| [option['text'], option['id']] }
   end
 
   def self.create_from_params(params)
@@ -62,8 +62,12 @@ class Lead < Podio::Item
     field_values_by_external_id('probability-of-sale', :simple => true)
   end
 
-  def status
-    field_values_by_external_id('status', :simple => true)
+  def status_id
+    field_values_by_external_id('status2', :simple => true).try(:[], 'id')
+  end
+
+  def status_text
+    field_values_by_external_id('status2', :simple => true).try(:[], 'text')
   end
 
   def followup_at
@@ -97,7 +101,7 @@ class Lead < Podio::Item
         'sales-contact' => (params[:sales_contact].present? ? params[:sales_contact].to_i : nil),
         'potential-revenue' => { :value => params['potential_revenue_value'], :currency => params['potential_revenue_currency'] },
         'probability-of-sale' => params[:probability].to_i,
-        'status' => params[:status],
+        'status2' => params[:status_id].to_i,
         'next-follow-up' => DateTime.new(params['followup_at(1i)'].to_i, params['followup_at(2i)'].to_i, params['followup_at(3i)'].to_i).to_s(:db)
       }.delete_if { |k, v| v.nil? }
     end

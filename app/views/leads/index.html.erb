@@ -16,7 +16,7 @@
       <td><%= lead.sales_contact %></td>
       <td><%= number_to_currency(lead.potential_revenue_value, :unit => lead.potential_revenue_currency) %></td>
       <td><%= number_to_percentage(lead.probability.to_i) %></td>
-      <td><%= lead.status %></td>
+      <td><%= lead.status_text %></td>
       <td><%= l(lead.followup_at.to_date) %></td>
       <td><%= link_to 'Edit', edit_lead_path(lead.id) %> | <%= link_to 'Delete', lead_path(lead.id), :method => :delete, :confirm => 'Are you sure?' %></td>
     </tr>
