@@ -7,7 +7,7 @@ PodioRailsSample::Application.routes.draw do
       post :create_from_app_auth
     end
   end
-  match "/auth/:provider/callback" => "sessions#create"
+  get "/auth/:provider/callback" => "sessions#create"
   resources :leads
   resources :tasks
 

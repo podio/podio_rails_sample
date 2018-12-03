@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :ensure_login
+  skip_before_action :ensure_login
 
   def new
   end

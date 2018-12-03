@@ -1,5 +1,5 @@
 class LeadsController < ApplicationController
-  before_filter :load_collections, :only => [:new, :edit]
+  before_action :load_collections, :only => [:new, :edit]
 
   def index
     @leads = Lead.all
