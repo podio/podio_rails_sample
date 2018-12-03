@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :ensure_login
+  before_action :ensure_login
 
   protected
 

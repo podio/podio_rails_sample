@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_filter :ensure_login
+  skip_before_action :ensure_login
 
   def new
   end
@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
 
   def create_from_app_auth
     Podio.setup(
-      :api_url => 'https://api.podio.com',
       :api_key => ENV['PODIO_CLIENT_ID'],
       :api_secret => ENV['PODIO_CLIENT_SECRET']
     )
