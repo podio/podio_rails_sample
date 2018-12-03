@@ -8,6 +8,7 @@ PodioRailsSample::Application.routes.draw do
     end
   end
   get "/auth/:provider/callback" => "sessions#create"
+  post "/auth/:provider/callback" => "sessions#create"
   resources :leads
   resources :tasks
 
